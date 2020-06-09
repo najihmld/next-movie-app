@@ -1,5 +1,14 @@
 import React from 'react'
 
+
+
+
+const About = () => {
+  return (
+    <div>About Page</div>
+  )
+}
+
 // functional componenet - arrow function
 // WHEN TO USE
 // 1. for smaller components
@@ -24,13 +33,13 @@ import React from 'react'
 //   )
 // }
 
-class About extends React.Component {
-  render() {
-    return(
-      <h1>Hello I am class componenet</h1>
-    )
-  }
-}
+// class About extends React.Component {
+//   render() {
+//     return(
+//       <h1>Hello I am class componenet</h1>
+//     )
+//   }
+// }
 
 
 
