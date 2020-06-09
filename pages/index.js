@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Navbar from '../components/navbar'
 import SideMenu from '../components/sideMenu'
@@ -9,7 +9,17 @@ import Footer from '../components/footer'
 import { getMovies } from '../actions'
 
 const Home = () => {
-  const movies = getMovies()
+  const [movies, setMovies] = useState([])
+
+  //improve this because now it's called everytime!
+  useEffect(() => {
+    const fetchData = async () => {
+      const resMovies = await getMovies()
+      setMovies(resMovies)
+    }
+    fetchData()
+  })
+
   return (
     <div>
       <Head>
