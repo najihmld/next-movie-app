@@ -17,6 +17,23 @@ const MovieCreateForm = () => {
     })
   }
 
+  const handleGenreChange = (event) => {
+    const { options } = event.target
+    const optionsLength = options.length
+    let value = []
+
+    for (let i = 0; i < optionsLength; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value)
+      }
+    }
+
+    setForm({
+      ...form,
+      genre: value.toString()
+    })
+  }
+
   return (
     <form>
       { JSON.stringify(form)}
@@ -92,6 +109,7 @@ const MovieCreateForm = () => {
       <div className="form-group">
         <label for="genre">Genre</label>
         <select
+          onChange={handleGenreChange}
           multiple
           className="form-control"
           id="genre">
