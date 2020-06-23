@@ -25,24 +25,27 @@ export const getCategories = () => {
 }
 
 export const getMovies = () => {
+  return axios.get(`${BASE_URL}/api/v1/movies`).then((res) =>  res.data)
+
 //  return new Promise((resolve, reject) => {
 //    setTimeout(() =>{
 //      resolve(MOVIE_DATA)
 //    }, 50)
 //  })
-
-  return axios.get(`${BASE_URL}/api/v1/movies`).then((res) =>  res.data)
 }
 
 export const createMovie = (movie) => {
-  return new Promise((resolve, reject) => {
-    //create ID for movie
-    movie.id = Math.random().toString(36).substr(2, 7)
-    MOVIE_DATA.push(movie)
-    setTimeout(() =>{
-      resolve(MOVIE_DATA)
-    }, 50)
-  })
+  movie.id = Math.random().toString(36).substr(2, 5)
+  return axios.post(`${BASE_URL}/api/v1/movies`, movie).then(res => res.data)
+
+  // return new Promise((resolve, reject) => {
+  //   //create ID for movie
+  //   movie.id = Math.random().toString(36).substr(2, 7)
+  //   MOVIE_DATA.push(movie)
+  //   setTimeout(() =>{
+  //     resolve(MOVIE_DATA)
+  //   }, 50)
+  // })
  }
 
 export const getMovieById = (id) => {
