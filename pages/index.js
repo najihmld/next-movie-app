@@ -20,30 +20,48 @@ const Home = (props) => {
   // console.log(JSON.stringify(props.images))
 
   const { images, categories, movies } = props
+  const [ filter, setFilter ] = useState('all')
 
-return (
-  <div>
-   <div className="home-page">
-   <div className="container">
-      <div className="row">
+  const changeCategory = (category) => {
+    setFilter(category)
+  }
 
-        <div className="col-lg-3">
-          <SideMenu
-            categories={categories}
-            appName={"Movie DB"}
-          />
-        </div>
-        <div className="col-lg-9">
-          <Carousel images={images} />
-          <div className="row">
-            <MovieList movies={movies || []} />
+  const filterMovies = movies => {
+    if (filter === 'all') {
+      return movies
+    }
+
+    return movies.filter((m) => {
+      return m.genre && m.genre.includes(filter)
+    })
+  }
+
+  return (
+    <div>
+    <div className="home-page">
+    <div className="container">
+        <div className="row">
+
+          <div className="col-lg-3">
+            <SideMenu
+              changeCategory={changeCategory}
+              activeCategory={filter}
+              categories={categories}
+              appName={"Movie DB"}
+            />
+          </div>
+          <div className="col-lg-9">
+            <Carousel images={images} />
+            <h1>Displaying {filter} movies</h1>
+            <div className="row">
+              <MovieList movies={filterMovies(movies) || []} />
+            </div>
           </div>
         </div>
       </div>
     </div>
-   </div>
-</div>
-)
+  </div>
+  )
 }
 
 Home.getInitialProps = async () => {
